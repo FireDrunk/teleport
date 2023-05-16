@@ -416,6 +416,13 @@ highAvailability:
     # Group of Issuer that cert-manager should look for.
     # This defaults to 'cert-manager.io' which is the default Issuer group.
     issuerGroup: cert-manager.io
+  # Settings to override the default strategy applied to the deployment(s), this can be useful if you have more than 2 replicas and want to control the behaviour of upgrades.
+  # strategy:
+  #   type: RollingUpdate
+  #   maxUnavailable: 1
+  #   maxSurge: 1
+
+  
   # Injects delay when performing pod rollouts to mitigate the loss of all agent tunnels at the same time
   # See https://github.com/gravitational/teleport/issues/13129
   minReadySeconds: 15

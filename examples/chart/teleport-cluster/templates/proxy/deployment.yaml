@@ -36,6 +36,21 @@ spec:
   {{- if $proxy.highAvailability.minReadySeconds }}
   minReadySeconds: {{ $proxy.highAvailability.minReadySeconds }}
   {{- end }}
+  {{- if $proxy.highAvailability.strategy -}}
+  strategy: {{- include "teleport-cluster.proxy.strategy" . | nindent 4 }}
+  {{- else }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      {{- if le .Values.highAvailability.replicaCount 2 }}
+      maxUnavailable: 1
+      maxSurge: 1
+      {{- end }}
+      {{- if gt .Values.highAvailability.replicaCount 2 }}
+      maxUnavailable: 50%
+      maxSurge: 50%
+      {{- end }}      
+  {{- end }}
 {{- else }}
   replicas: 1
 {{- end }}

@@ -581,6 +581,11 @@
                             "default": 1
                         }
                     }
+                },
+                "strategy": {
+                    "$id": "#/properties/highAvailability/properties/strategy",
+                    "type": ["object", "null"],
+                    "default": null
                 }
             }
         },
