@@ -70,5 +70,12 @@ spec:
     targetPort: 27017
     protocol: TCP
   {{- end }}
+  {{- if $proxy.type "NodePort" }}
+  - name: nodeport
+    port: 443
+    targetPort: 3080
+    nodePort: {{ default 443 $proxy.service.nodePort }}
+    protocol: TCP
+  {{- end }}
 {{- end }}
   selector: {{- include "teleport-cluster.proxy.selectorLabels" . | nindent 4 }}
